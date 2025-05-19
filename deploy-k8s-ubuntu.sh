@@ -44,17 +44,17 @@ apt-get install -y apt-transport-https curl >/dev/null 2>&1
 
 echo "[TASK 8] Add GPG key for K8s repo"
 mkdir -p /etc/apt/keyrings/
-echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
  >/dev/null 2>&1
 
 echo "[TASK 9] Add K8s repository"
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg >/dev/null 2>&1
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg >/dev/null 2>&1
 
 # refresh repo
 apt-get update >/dev/null 2>&1
 
 echo "[TASK 10] Install K8s"
-apt-get install -y kubelet=1.32.3-1.1 kubeadm=1.32.3-1.1 kubectl=1.32.3-1.1 >/dev/null 2>&1
+apt-get install -y kubelet=1.29.8-1.1 kubeadm=1.29.8-1.1 kubectl=1.29.8-1.1 >/dev/null 2>&1
 
 echo "[TASK 11] Turn off automatic updates"
 apt-mark hold kubelet kubeadm kubectl >/dev/null 2>&1

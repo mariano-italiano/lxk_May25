@@ -21,3 +21,5 @@
 5. Instalacja pakietów pomocniczych (curl, http-transport)
 6. Dodanie repozytorium K8s (+ refresh)
 7. Join do control-plane (jako root `kubeadm join`)
+
+> Note: Punkty 1-6 pokrywa skyprt `deploy-k8s-<os>.sh`.

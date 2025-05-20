@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wypożyczalnia Samochodów</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+        header {
+            background: #ff5f5f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background: #333;
+            overflow: hidden;
+        }
+        nav a {
+            color: white;
+            float: left;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        nav a:hover {
+            background-color: #ff5f5f;
+        }
+        section {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .car-card {
+            background: white;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            width: 250px;
+        }
+        .car-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .car-card h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        .car-card p {
+            font-size: 0.9em;
+            color: #555;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Wypożyczalnia Samochodów</h1>
+        <p>Znajdź idealny samochód na wynajem w Twojej okolicy</p>
+    </header>
+
+    <nav>
+        <a href="#">Strona Główna</a>
+        <a href="#">Wynajem</a>
+        <a href="#">Flota</a>
+        <a href="#">Promocje</a>
+        <a href="#">Kontakt</a>
+    </nav>
+
+    <section>
+        <div class="car-card">
+            <img src="https://via.placeholder.com/250x150" alt="Car Image">
+            <h3>Audi A4</h3>
+            <p>Elegancka limuzyna, idealna na długie trasy.</p>
+            <button>Wynajmij teraz</button>
+        </div>
+        <div class="car-card">
+            <img src="https://via.placeholder.com/250x150" alt="Car Image">
+            <h3>BMW X5</h3>
+            <p>Przestronny SUV z napędem na cztery koła.</p>
+            <button>Wynajmij teraz</button>
+        </div>
+        <div class="car-card">
+            <img src="https://via.placeholder.com/250x150" alt="Car Image">
+            <h3>Volkswagen Golf</h3>
+            <p>Ekonomiczny hatchback, idealny na miasto.</p>
+            <button>Wynajmij teraz</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Wypożyczalnia Samochodów | Wszelkie prawa zastrzeżone</p>
+    </footer>
+</body>
+</html>

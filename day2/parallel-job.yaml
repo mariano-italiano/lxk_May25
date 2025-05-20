@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sleep-job
+spec:
+  # uruchom się 3 razy
+  completions: 10
+  # jednoczesne odpalenie podow
+  parallelism: 5
+  template:
+    spec:
+      containers:
+      - name: sleep-job
+        image: busybox
+        command: ["/bin/sleep"]
+        args: ["15"]
+      restartPolicy: Never

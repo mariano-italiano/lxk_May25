@@ -1,0 +1,329 @@
+echo "test string" >> /tmp/test 
+echo "test string" >> /tmp/test2 
+kubectl edit pod db-init 
+kubectl expose pod db-init --port 80 --name db-svc 
+sudo sysctl -a |grep -i bridge
+sudo -i
+kubectl get ns
+kubectl get pods
+kubectl get pods -o yaml
+cd lxk_May25/
+mkdir day2
+cd day2
+vi resourcequota.yaml
+mv resourcequota.yaml default-resource-quota.yaml
+vi default-resource-quota.yaml
+kubectl apply -f default-resource-quota.yaml
+vi default-resource-quota.yaml
+kubectl apply -f default-resource-quota.yaml
+kubectl get resourcequotas 
+kubectl run another-not-allowed-pod --image nginx
+kubectl edit resourcequotas default-resource-quota 
+kubectl delete -f default-resource-quota.yaml 
+kubectl apply -f default-resource-quota.yaml -n lxk-ns 
+kubectl describe ns lxk-ns 
+kubectl describe ns default 
+kubectl get pods -o wide
+kubectl logs ubuntu-pod 
+kubectl logs first-pod 
+vi sidecar-pod.yaml
+tail -f /tmp/test
+touch /tmp/test
+tail -f /tmp/test
+tail -F /tmp/test2
+vi sidecar-pod.yaml
+kubectl apply -f sidecar-pod.yaml
+kubectl get pods
+kubectl logs sidecar-pod 
+kubectl logs sidecar-pod -c sidecar
+kubectl logs sidecar-pod --all-containers 
+vi sidecar-pod.yaml
+cp -rp sidecar-pod.yaml multicontainer-pod.yaml
+vi multicontainer-pod.yaml
+kubectl apply -f multicontainer-pod.yaml
+kubectl get pods
+watch -n1 kubectl get pods
+kubectl get pods -f
+kubectl get pods -w
+watch -n1 kubectl get pods
+kubectl logs multicontainer-pod --all-containers 
+vi multicontainer-pod.yaml
+kubectl replace --force -f multicontainer-pod.yaml
+watch -n1 kubectl get pods
+kubectl logs multicontainer-pod -c web
+kubectl logs multicontainer-pod -c we1
+kubectl logs multicontainer-pod -c web1
+kubectl logs multicontainer-pod -c db
+kubectl describe pod multicontainer-pod 
+kubectl events 
+kubectl get events -n kube-system 
+kubectl get pods -o wide
+kubectl replace --force -f multicontainer-pod.yaml
+kubectl get pods -o wide
+vi init-pod.yaml
+kubectl apply -f init-pod.yaml
+vi init-pod.yaml
+kubectl apply -f init-pod.yaml
+watch -n1 kubectl get pods
+kubectl logs init-pod 
+kubectl logs init-pod -c delay
+kubectl logs init-pod -c delay2
+git pull
+git checkout develop 
+git checkout main
+git checkout master
+ls
+cd ..
+git status
+git add .
+git commit -m "add day2 files"
+git push
+git checkout develop 
+ls -la
+rm day1 -rf
+rm d*
+ls -la
+rm install-K8s.md 
+rm README.md 
+git branch
+ls -la
+vi index.html
+git status
+git add .
+git commit -m "adding web content"
+git push
+git checkout mater
+git checkout master 
+ls
+cd day2/
+ls -la
+vi web-init.yaml
+kubectl apply -f web-init.yaml
+vi web-init.yaml
+kubectl apply -f web-init.yaml
+watch -n1 kubectl get pods
+kubectl logs web-init -c download
+kubectl logs web-init 
+kubectl get pods -o wide
+cp -rp multicontainer-pod.yaml app-init.yaml
+vi app-init.yaml
+mv app-init.yaml db-init.yaml
+cp db-init.yaml web-init.yaml
+vi web-init.yaml 
+vi db-init.yaml 
+kubectl apply -f db-init.yaml -f web-init.yaml 
+q
+kubectl get pods
+vi web-init.yaml 
+mv web-init.yaml web-init-pod.yaml
+kubectl apply -f web-init-pod.yaml 
+watch -n1 kubectl get pods
+kubectl logs web-init-pod 
+kubectl logs web-init-pod -c check-svc
+kubectl logs web-init-pod --all-containers 
+kubectl get pods -o wide
+kubectl get pods -o wide | grep -o r01
+kubectl get pods -o wide | grep r01
+kubectl get pods -o wide | grep r01 | wc -l
+kubectl get pods -o wide | grep r02 | wc -l
+kubectl delete po web-init-pod 
+kubectl get pods -o wide | grep r02 | wc -l
+kubectl get pods -o wide | grep r01 | wc -l
+kubectl run nodename-pod --image nginx --dry-run=client -o yaml > nodename-pod,yaml
+vi nodename-pod,yaml
+mv nodename-pod,yaml nodename-pod.yaml
+vi nodename-pod.yaml
+kubectl apply -f nodename-pod.yaml
+kubectl get pods -o wide
+kubectl get no --show-labels 
+cp nodename-pod.yaml nodeselector-pod.yaml
+vi nodeselector-pod.yaml
+kubectl apply -f nodeselector-pod.yaml
+vi nodeselector-pod.yaml
+kubectl apply -f nodeselector-pod.yaml
+kubectl get pods -o wide
+kubectl events
+vi nodeselector-pod.yaml 
+kubectl apply -f nodeselector-pod.yaml
+kubectl replace --force -f nodeselector-pod.yaml
+kubectl get pods -o wide
+ls -la
+mv *.yaml lxk_May25/day2/
+cd lxk_May25/day2/
+ls -la
+kubectl get pods -o wide
+kubectl describe nodes | grep -i taints -A 3
+kubectl taint  node worker01 zone=dmz:NoSchedule 
+kubectl describe nodes | grep -i taints -A 3
+kubectl run taint-pod --image nginx
+kubectl get po -o wide
+cp -rp nodename-pod.yaml toleration-pod.yaml
+vi toleration-pod.yaml\
+vi toleration-pod.yaml
+kubectl apply -f toleration-pod.yaml
+kubectl get po -o wide
+vi toleration-pod.yaml
+kubectl replace --frce -f toleration-pod.yaml
+kubectl replace --force -f toleration-pod.yaml
+kubectl get po -o wide
+watch -n1 kubectl get pods
+watch -n1 kubectl get pods -o wide
+kubectl describe nodes | grep -i taints -A 3
+kubectl taint node  worker01 env-
+kubectl taint node  worker01 zone-
+kubectl describe nodes | grep -i taints -A 3
+vi affinity-pod.yaml
+mv affinity-pod.yaml woth-node-affinity.yaml
+vi woth-node-affinity.yaml
+mv woth-node-affinity.yaml with-node-affinity.yaml
+vi with-node-affinity.yaml
+kubectl label node worker01 kubernetes.io/country=poland
+kubectl label node worker02 kubernetes.io/country=france
+kubectl label node worker02 kubernetes.io/storage=platinum
+kubectl get pods -o wide
+kubectl apply -f with-node-affinity.yaml 
+kubectl get pods -o wide
+vi with-pod-affinity.yaml
+kubectl get pods -o wide --show-labels 
+vi with-pod-affinity.yaml
+kubectl apply -f with-pod-affinity.yaml
+kubectl get pods -o wide --show-labels 
+cpc -rp with-pod-affinity.yaml with-pod-antiaffinity.yaml
+vi with-pod-antiaffinity.yaml
+cp -rp with-pod-affinity.yaml with-pod-antiaffinity.yaml
+vi with-pod-antiaffinity.yaml
+kubectl apply -f with-pod-antiaffinity.yaml
+kubectl get pods -o wide --show-labels 
+vi my-replicaset.yaml
+kubectl apply -f my-replicaset.yaml
+kubectl get pods
+kubectl get pods --show-labels 
+kubectl get rs
+kubectl delete pod my-replicaset-x9jps
+kubectl get rs
+kubectl get pods --show-labels 
+kubectl edit pod with-node-affinity 
+kubectl get pods --show-labels 
+kubectl get pods --show-labels -l tier=frontend | wc -l
+kubectl get pods --show-labels -l tier=frontend 
+kubectl delete pod with-node-affinity 
+kubectl get pods --show-labels -l tier=frontend 
+kubectl scale rs my-replicaset --replicas 8
+kubectl get pods --show-labels 
+kubectl scale rs my-replicaset --replicas 2
+kubectl get pods --show-labels 
+kubectl delete all --all 
+vi nginx-deployment.yaml
+kubectl apply -f nginx-deployment.yaml
+kubectl get deploy,rs,pod
+kubectl describe deployments.apps nginx-deployment 
+kubectl edit deployments.apps nginx-deployment 
+kubectl describe deployments.apps nginx-deployment 
+kubectl edit deployments.apps nginx-deployment 
+kubectl scale deployment nginx-deployment --replicas 10
+kubectl get pods
+kubectl set image deployments nginx-deployment web=nginx:1.19.2
+watch -n1 kubectl get pods
+kubectl describe deployments.apps nginx-deployment 
+kubectl annotate deployments.apps nginx-deployment kubernetes.io/change-cause="updating image to version 1.19.2, change number No12345, implementer Marcin K. application TEST"
+kubectl rollout status deployment nginx-deployment 
+kubectl rollout history deployment nginx-deployment 
+kubectl edit deployments.apps nginx-deployment 
+kubectl rollout status deployment nginx-deployment 
+kubectl rollout history deployment nginx-deployment 
+kubectl set image deployments nginx-deployment web=nginx:broken
+kubectl set image deployments nginx-deployment web=nginx:broken --record
+kubectl rollout history deployment nginx-deployment 
+kubectl rollout status deployment nginx-deployment 
+kubectl get pods 
+kubectl rollout history deployment nginx-deployment 
+kubectl rollout undo deployment nginx-deployment --to-revision 2 
+kubectl get pods 
+kubectl rollout status deployment nginx-deployment 
+kubectl rollout history deployment nginx-deployment 
+kubectl describe deployments.apps nginx-deployment 
+kubectl rollout history deployment nginx-deployment 
+kubectl get rs
+kubectl describe replicasets.apps nginx-deployment-54776bf59b
+kubectl get rs nginx-deployment-54776bf59b -o json
+kubectl get rs nginx-deployment-54776bf59b -o json | jq
+sudo apt  install jq -y
+kubectl get rs nginx-deployment-54776bf59b -o json | jq -r '.metadata.annotations'
+kubectl get rs nginx-deployment-54776bf59b -o json | jq -r '.metadata.annotations.deployment.kubernetes.io/revision'
+kubectl get rs nginx-deployment-54776bf59b -o json | jq -r '.metadata.annotations[2]'
+kubectl get rs nginx-deployment-54776bf59b -o json | jq -r '.metadata.annotations'
+kubectl get rs nginx-deployment-54776bf59b -o json | jq -r '"RS Name: \(.metadata.name), .metadata.annotations"'
+kubectl get rs nginx-deployment-54776bf59b -o json | jq -r '"RS Name: \(.metadata.name)," .metadata.annotations'
+kubectl get rs nginx-deployment-54776bf59b -o json | jq -r '"RS Name: \(.metadata.name), \(.metadata.annotations)"'
+kubectl get rs -o json | jq -r '.items[] | "RS Name: \(.metadata.name), \(.metadata.annotations)"'
+kubectl get rs -o json | jq -r '.items[] | "RS Name: \(.metadata.name), \(.metadata.annotations) \n"'
+kubectl rollout history deployment nginx-deployment 
+kubectl delete rs nginx-deployment-54776bf59b
+kubectl rollout history deployment nginx-deployment 
+kubectl get rs
+kubectl edit deployments.apps nginx-deployment 
+kubectl set image deployments nginx-deployment web=nginx:latest ; watch -n1 kubectl get pods
+kubectl get rs
+kubectl get po
+vi readiness-pod.yaml
+kubectl apply -f readiness-pod.yaml
+kubectl get pods
+watch -n1 kubectl get pods
+kubectl logs readiness-pod 
+watch -n1 kubectl get pods
+kubectl exec -it readiness-pod -- bash
+kubectl logs readiness-pod -f
+watch -n1 kubectl get pods
+kubectl exec -it readiness-pod -- bash
+watch -n1 kubectl get pods
+kubectl logs readiness-pod -f
+watch -n1 kubectl get pods
+kubectl events 
+vi livenes-pod.yaml
+kubectl apply -f livenes-pod.yaml
+watch -n1 kubectl get pods
+kubectl events 
+watch -n1 kubectl get pods
+vi job-pi.yaml
+kubectl apply -f job-pi.yaml
+kubectl get job,pod
+watch -n1 kubectl get job,pod
+vi sleep-job.yaml
+kubectl apply -f sleep-job.yaml
+watch -n1 kubectl get job,pod
+cp sleep-job.yaml parallel-job.yaml
+vi parallel-job.yaml
+kubectl apply -f parallel-job.yaml
+watch -n1 kubectl get job,pod
+kubectl logs job-pi-cntmv
+vi cronjob-hello.yaml
+kubectl apply -f cronjob-hello.yaml
+watch -n1 kubectl get cj,job,pod
+kubectl logs cronjob-hello-29129128-rd65p 
+watch -n1 kubectl get cj,job,pod
+kubectl get node k8s-master | grep taint -i -A 3
+kubectl get node k8s-master | grep taints -i -A 3
+kubectl describe node k8s-master | grep taints -i -A 3
+vi my-daemonset.yaml
+kubectl apply -f my-daemonset.yaml
+kubectl get ds,pod 
+kubectl get ds,pod  -o wide
+kubectl set image ds my-daemonset fluentd-elasticsearch=nginx:1.19.2
+watch -n1 kubectl get ds,pod  -o wide
+vi my-sts.yaml
+kubectl apply -f my-sts.yaml
+kubectl get pod,sts
+kubectl delete cj cronjob-hello 
+kubectl get pod,sts
+kubectl delete deployments.apps nginx-deployment 
+kubectl delete jobs.batch sleep-job 
+kubectl get pod,sts
+kubectl scale sts my-sts --replicas 10
+watch -n1 kubectl get pod,sts
+kubectl scale sts my-sts --replicas 1
+watch -n1 kubectl get pod,sts
+kubectl get svc
+cd ..
+git status
+history 
+history | awk '$1 > 172' | cut -c 8- > day2-history.txt

@@ -1,0 +1,243 @@
+kubectl get deployments.apps 
+kubectl get pods -A
+kubectl create deployment test-deploy --replicas 3 --image nginx
+kubectl get deployments.apps 
+kubectl get pods
+kubectl rollout restart deployment test-deploy 
+kubectl get pods
+kubectl get deployments.apps 
+kubectl get svc
+kubectl expose deployment test-deploy --name clusterip-svc --port 80
+kubectl get svc
+curl http://10.98.50.238
+kubectl get pod
+kubectl exec -it my-sts-0 -- bash
+kubectl run dns-pod1 -it --image nicolaka/netshoot 
+kubectl run dns-pod1 -iimage nicolaka/netshoot 
+kubectl run dns-pod1 -image nicolaka/netshoot 
+kubectl run dns-pod1 --image nicolaka/netshoot 
+kubectl get pods
+kubectl exec -it dns-pod1 -- bash
+kubectl run dns-pod1 --image nicolaka/netshoot -n lxk-ns 
+kubectl get pod -n l`
+kubectl get pod -n lxk-ns 
+kubectl get resourcequotas 
+kubectl get resourcequotas -n lxk-ns 
+kubectl delete resourcequotas -n lxk-ns 
+kubectl delete resourcequotas -n lxk-ns default-resource-quota 
+kubectl run dns-pod1 --image nicolaka/netshoot -n lxk-ns 
+kubectl get pods -A
+kubectl -n lxk-ns exec -it dns-pod1 -- bash 
+kubectl get po -n lxk-ns 
+kubectl delete pod -n lxk-ns dns-pod1 
+kubectl run -it dns-pod1 --image nicolaka/netshoot -n lxk-ns 
+kubectl get po -n lxk-ns 
+kubectl run -it dns-pod1 --image nicolaka/netshoot -n lxk-ns 
+kubectl exec -it -n lxk-ns dns-pod1 -- bash
+kubectl get svc
+kubectl expose deployment test-deploy --name nodeport-svc --type NodePort --port 80 
+kubectl get svc
+kubectl expose deployment test-deploy --name lb-svc --port 80 --type LoadBalancer
+kubectl get svc
+kubectl edit svc lb-svc 
+kubectl get svc
+sudo iptables -v -L -n
+sudo iptables -v -L -n -t NAT
+sudo iptables -v -L -n 
+kubectl get ingressclasses.networking.k8s.io 
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.0/deploy/static/provider/baremetal/deploy.yaml
+watch -n1 kubectl get all -n ingress-nginx
+kubectl -n ingress-nginx edit svc ingress-nginx-controller
+watch -n1 kubectl get all -n ingress-nginx
+kubectl get ingressclasses.networking.k8s.io 
+kubectl create deployment cars --image nginx --replicas=1
+kubectl create deployment books --image nginx --replicas=1
+kubectl expose deployment cars --port 80 --name cars-svc
+kubectl expose deployment books --port 80 --name books-svc
+kubectl get svc,ep,pod
+kubectl get svc,ep,pod -o wide
+kubectl delete svc lb-svc 
+kubectl get svc,ep,pod -o wide
+kubectl get svc,ep,pod -o wide -n ingress-nginx 
+ls -la
+cd lxk_May25/
+git status
+git pull
+mkdir day3
+cd day3
+vi cars-index.html
+vi books-index.html
+kubectl cp cars-index.html cars-6664876f54-kv9pc:/usr/share/nginx/html/index/html
+kubectl cp cars-index.html cars-6664876f54-kv9pc:/usr/share/nginx/html/index.html
+kubectl cp books-index.html books-7c7bd6c74f-fnwsf:/usr/share/nginx/html/index.html
+vi app-ingress.yaml
+kubectl apply -f app-ingress.yaml
+kubectl describe ingress app-ingress 
+kubectl get deployments.apps 
+kubectl get svc
+kubectl delete svc nodeport-svc clusterip-svc 
+kubectl expose deployment test-deploy --port 80 --name test-deploy-svc
+kubectl edit ingress app-ingress 
+kubectl describe ingress app-ingress 
+kubectl get svc -n ingress-nginx 
+kubectl edit ingress app-ingress 
+kubectl describe ingress app-ingress 
+kubectl rollout restart deployment cars 
+kubectl  get po
+sudo apt install nfs-common nfs-kernel-server cifs-utils -y
+sudo mkdir /var/nfs-share 
+sudo chown -R nobody:nogroup /var/nfs-share
+sudo vi /etc/exports 
+sudo exportfs -rav
+sudo systemctl restart nfs-kernel-server
+cp -rp ../day2/nodename-pod.yaml volume-pod.yaml
+vi volume-pod.yaml
+kubectl apply -f volume-pod.yaml
+kubectl get pods
+kubectl get pods -o wide
+kubectl exec -it volume-pod -- bash
+sudo ls -la /var/nfs-share/
+kubectl delete pod volume-pod 
+kubectl apply -f volume-pod.yaml
+kubectl exec -it volume-pod -- bash
+vi volume-pod.yaml
+vi pv-vol-pod.yaml
+kubectl get storageclasses.storage.k8s.io 
+vi pv-vol-pod.yaml
+kubectl apply -f pv-vol-pod.yaml
+kubectl get pv
+mv pv-vol-pod.yaml pv-vol.yaml
+mv pv-vol.yaml pv.yaml
+vi pvc.yaml
+vi pv.yaml 
+kubectl delete pv pv-vol-pod 
+mv pv.yaml test-pv.yaml
+kubectl apply -f test-pv.yaml 
+mv pvc.yaml  test-pvc.yaml
+vi test-pvc.yaml
+kubectl get pv
+kubectl apply -f test-pvc.yaml 
+kubectl get pv,pvc
+kubectl delete pvc test-pvc 
+vi test-pvc.yaml
+kubectl apply -f test-pvc.yaml 
+kubectl get pv,pvc
+vi test-pv-pod.yaml
+sudo vi /var/nfs-share/index.html
+vi test-pv-pod.yaml
+kubectl apply -f test-pv-pod.yaml
+kubectl expose pod test-pv-pod --port 80 --type NodePort --name test-pv-pod-svc
+kubectl edit pod test-pv-pod 
+kubectl expose pod test-pv-pod --port 80 --type NodePort --name test-pv-pod-svc
+kubectl get sv
+kubectl get svc
+kubectl get pod
+kubectl events
+kubectl get pod -o wide
+kubectl delete pod test-pv-pod 
+kubectl get svc
+kubectl get svc --show-labels 
+vi test-pv-pod.yaml
+kubectl apply -f test-pv-pod.yaml
+kubectl get pod -o wide
+kubectl delete pod test-pv-pod 
+kubectl delete pvc test-pvc 
+kubectl get pv
+kubectl apply -f test-pvc.yaml 
+kubectl get pv,pvc
+kubectl get pv test-pv -o json
+kubectl patch pv test-pv -p '{"spec": {"claimRef": null}}'
+kubectl get pv test-pv -o json
+kubectl get pv,pvc
+kubectl delete pv test-pv 
+kubectl get pv,pvc
+kubectl edit pv test-pv 
+kubectl get pv,pvc
+kubectl delete pvc test-pvc 
+kubectl apply -f test-pv.yaml -f test-pvc.yaml -f test-pv-pod.yaml 
+kubectl get pods
+kubectl exec -it test-pv-pod -- bash
+kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+kubectl get all -n local-path-storage
+kubectl edit pod local-path-provisioner-74f9666bc9-pvltm -n local-path-storage 
+kubectl get sc
+cp -rp test-pvc.yaml dynamic-pvc.yaml
+cp -rp test-pv-pod.yaml dynamic-pv-pod.yaml
+vi dynamic-pvc.yaml
+vi dynamic-pv-pod.yaml
+kubectl get pv,pvc
+kubectl apply -f dynamic-pvc.yaml 
+kubectl get pv,pvc
+watch -n1 kubectl get pv,pvc
+kubectl apply -f dynamic-pv-pod.yaml 
+watch -n1 kubectl get pv,pvc,pod
+vi my-configmap.yaml
+kubectl apply -f my-configmap.yaml
+kubectl get cm 
+kubectl describe cm my-configmap 
+sudo cat /etc/apt/sources.list
+sudo cat /etc/apt/sources.list | grep -v "#"
+sudo cat /etc/apt/sources.list | grep -v "#" > sources.list 
+vi sources.list 
+kubectl create cm cm-sources --from-file sources.list 
+kubectl describe cm cm-sources 
+kubectl create cm appDetails --from-literal version="1.0" --from-literal dataDir=/data 
+kubectl create cm app-details --from-literal version="1.0" --from-literal dataDir=/data 
+kubectl describe  cm app-details 
+vi envFile
+kubectl create cm from-env-file --from-env-file envFile 
+kubectl describe cm from-env-file 
+vi configmap-pod.yaml
+kubectl apply -f configmap-pod.yaml
+kubectl exec -it configmap-pod -- printenv 
+vi configmap-volume-pod.yaml
+kubectl apply -f configmap-volume-pod.yaml
+kubectl exec -it configmap-volume-pod -- bash
+kubectl exec -it configmap-volume-pod -- sh
+kubectl edit cm my-configmap 
+kubectl exec -it configmap-volume-pod -- sh
+kubectl create secret generic app-creds --from-literal root=securePass123!
+kubectl get secrets 
+kubectl describe secrets app-creds 
+kubectl get secrets app-creds -o json 
+echo "c2VjdXJlUGFzczEyMyE=" | base64 -d 
+htpasswd -c .htpasswd mariola
+sudo apt install apache2-utils -y
+htpasswd -c .htpasswd mariola
+kubectl create secret generic nginx-htpasswd --from-file .htpasswd 
+rm .htpasswd
+kubectl get secrets nginx-htpasswd -o yaml 
+echo "bWFyaW9sYTokYXByMSRTQkp0ckRiQyRLY05LY29qVW1vUnFQbFVYemkvWVgwCg==" | base64 -d && echo 
+vi nginx-config.yaml
+kubectl apply -f nginx-config.yaml
+kubectl create deployment nginx-app --image nginx --replicas 3 --dry-run=client -o yaml
+kubectl create deployment nginx-app --image nginx --replicas 3 --dry-run=client -o yaml>nginx-app.yaml
+vi nginx-app.yaml
+kubectl apply -f nginx-app.yaml
+kubectl get pods
+kubectl expose deployment nginx-app --port 80 --name nginx-app-svc --type NodePort
+kubectl get svc
+vi final-app.yaml
+kubectl apply -f final-app.yaml
+watch -n1 kubectl get all -n app
+kubectl rollout restart deployment -n app postgres 
+watch -n1 kubectl get all -n app
+vi final-app.yaml
+kubectl get svc
+kubectl get pod -n app
+kubectl rollout restart -n app deployment postgres 
+kubectl get pods
+kubectl get pods -n app
+kubectl delete pods --field-selector="status.phase!=Succeeded,status.phase!=Running"
+kubectl delete pods --field-selector="status.phase!=Succeeded,status.phase!=Running" -n app
+kubectl get pods
+kubectl get pods -n app
+kubectl delete pod postgres-b89f547b6-86l7p
+kubectl delete pod postgres-b89f547b6-86l7p -n app
+kubectl get pods --field-selector="status.phase!=Running" -n app
+kubectl get pods --field-selector="status.phase=Running" -n app
+cd ..
+git status
+git add .
+history
+history | awk '$1 > 511' | cut -c 8- > day3-history.txt
